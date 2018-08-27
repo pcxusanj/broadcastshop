@@ -1,0 +1,32 @@
+<h1> Order detail</h1>
+<ng-container *ngIf="order$ | async as order">
+    <table class="table">
+        <tr> <th>userID: {{ order.userId }}</th></tr>
+        <tr> <th>placed Date: {{ order.datePlaced | date }}</th></tr>
+        <tr><td>name: {{ order.shipping.name }} </td></tr>
+        <tr><td>Address: {{ order.shipping.addressLine1 }} 
+                {{ order.shipping.addressLine2 }}
+                ,{{ order.shipping.city }}
+        </td></tr>
+        <tr><td>
+            Items:
+            <ul  class="list-group list-group-flush">
+                <li *ngFor="let item of order.items" class="list-group-item">
+                    {{ item.quantity }} x {{ item.product.title }}
+                    <div class="float-right">
+                    {{ item.totalPrice | currency:'USD':true }}
+                    </div>
+                </li>
+            </ul>
+        </td> </tr>
+        <tr>
+            <td>
+                <div class="float-right">
+                        Total:  {{ order.sumPrice | currency:'USD':true }}
+                </div>
+            </td>
+        </tr>
+        
+
+    </table>
+</ng-container>
